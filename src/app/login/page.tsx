@@ -18,16 +18,19 @@ import { useAlert } from '../contexts/AlertContext';
 import { useLoading } from '../contexts/LoadingContext';
 import { setStorage } from '@/utils/storage';
 import storageKeys from '@/constants/storageKeys';
+import { useRouter } from 'next/navigation';
+import { LockClosedIcon } from '@radix-ui/react-icons';
 
 const Login = () => {
   const { showAlert } = useAlert();
   const { showLoading, hideLoading } = useLoading();
+  const router = useRouter();
 
   const { mutateAsync } = useMutation(loginApi, {
     onSuccess: (res) => {
       if (res.token) {
         setStorage(storageKeys.ACCESS_TOKEN, res.token);
-        console.log(res.token);
+        router.push(routePaths.HOME);
       }
       hideLoading();
     },
@@ -59,6 +62,7 @@ const Login = () => {
           fontSize={14}
           className='my-6'
           errorMsg={errors?.username?.message}
+          autoComplete={false}
           {...register('username')}
         />
         <UnderLineInput

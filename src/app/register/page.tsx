@@ -29,7 +29,6 @@ const Register = () => {
     registerApi,
     {
       onSuccess: (res) => {
-        console.log(res);
         if (res?.success) {
           showAlert({
             icon: 'success',

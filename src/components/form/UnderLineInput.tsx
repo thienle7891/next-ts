@@ -11,6 +11,7 @@ interface IUnderLineInput {
   className?: string;
   fontSize?: string | number;
   errorMsg?: string | undefined;
+  // autoComplete?: boolean | undefined;
 }
 
 const UnderLineInput: FC<IUnderLineInput> = React.forwardRef(
@@ -38,6 +39,7 @@ const UnderLineInput: FC<IUnderLineInput> = React.forwardRef(
             type={
               !isPasswordInput ? 'text' : isShowPassword ? 'text' : 'password'
             }
+            autoComplete='off'
             style={{ fontSize }}
             {...props}
           />

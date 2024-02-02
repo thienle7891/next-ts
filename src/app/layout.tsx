@@ -12,6 +12,7 @@ import AlertCustom from '@/components/Alert/AlertCustom';
 import { LoadingProvider } from './contexts/LoadingContext';
 import LoaderSpinner from '@/components/Loaders/LoaderSpinner';
 import { GlobalProvider } from '@/globalContext/GlobalContext';
+import { ThemeProvider } from '@/components/theme-provider';
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -38,20 +39,29 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Provider>
-          <GlobalProvider>
-            <AlertProvider>
-              <LoadingProvider>
-                <>
-                  <Header />
-                  <AlertCustom />
-                  <LoaderSpinner />
-                  {children}
-                </>
-              </LoadingProvider>
-            </AlertProvider>
-          </GlobalProvider>
-        </Provider>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Provider>
+            <GlobalProvider>
+              <AlertProvider>
+                <LoadingProvider>
+                  <>
+                    <Header />
+                    <AlertCustom />
+                    <LoaderSpinner />
+                    <div className='container flex-1 items-start'>
+                      {children}
+                    </div>
+                  </>
+                </LoadingProvider>
+              </AlertProvider>
+            </GlobalProvider>
+          </Provider>
+        </ThemeProvider>
       </body>
     </html>
   );
